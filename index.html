@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tabungan Siswa - SMK Swasta Prama Artha</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Arial, sans-serif; }
+body { background:#f0f2f5; }
+.app-container { max-width:480px; margin:0 auto; background:#fff; min-height:100vh; }
+
+/* HEADER - SESUAI SCREENSHOT */
+.main-header { background:#5a7d3c; background:linear-gradient(135deg,#6b8f3e,#3f5a26); color:white; text-align:center; padding:28px 20px 40px; border-radius:0 0 25px 25px; }
+.logo-box { width:95px; height:95px; background:white; border-radius:50%; margin:0 auto 14px; display:flex; align-items:center; justify-content:center; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,0.2); }
+.logo-box img { width:100%; height:100%; object-fit:contain; padding:8px; }
+.logo-box i { font-size:42px; color:#5a7d3c; }
+.sub-title { font-size:13px; letter-spacing:2px; font-weight:600; opacity:0.9; }
+.main-title { font-size:30px; font-weight:800; margin:4px 0 8px; }
+.badge-title { background:rgba(0,0,0,0.25); display:inline-block; padding:6px 14px; border-radius:20px; font-size:12px; }
+
+/* NAV */
+.nav-menu { display:flex; background:white; margin:-18px 15px 0; border-radius:15px; box-shadow:0 3px 12px rgba(0,0,0,0.1); overflow:hidden; position:relative; z-index:2; }
+.nav-item { flex:1; text-align:center; padding:13px 5px; text-decoration:none; color:#666; font-size:13px; font-weight:600; }
+.nav-item.active { background:#eef3e6; color:#3f5a26; }
+.nav-item i { margin-right:4px; }
+
+/* CONTENT */
+.main-content { padding:18px 15px; }
+.section-header { display:flex; gap:10px; align-items:center; margin-bottom:14px; }
+.section-header h3 { font-size:19px; }
+.sub-text { font-size:12px; color:#888; }
+.card-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.card { padding:16px; border-radius:15px; color:white; }
+.card-blue { background:#7a9e4a; }
+.card-orange { background:#a8bf7a; }
+.card-green { background:#5a7d3c; }
+.card-purple { background:#3a4a2e; }
+.card-label { font-size:11px; text-transform:uppercase; opacity:0.9; }
+.card-value { font-size:19px; font-weight:800; margin-top:5px; }
+.card-icon { font-size:20px; margin-bottom:8px; opacity:0.9; }
+
+.section-block { margin-top:20px; }
+.bg-white { background:white; border:1px solid #eee; border-radius:18px; padding:18px; box-shadow:0 2px 10px rgba(0,0,0,0.05); }
+.form-header { display:flex; gap:8px; align-items:center; margin-bottom:15px; }
+.form-header h3 { font-size:16px; color:#3f5a26; }
+.input-box { margin-bottom:13px; }
+.input-box label { display:block; font-size:13px; font-weight:600; margin-bottom:6px; }
+.input-box input, .input-box select { width:100%; padding:12px; border:1px solid #ddd; border-radius:12px; outline:none; font-size:14px; }
+.input-box input:focus, .input-box select:focus { border-color:#5a7d3c; }
+.btn { width:100%; padding:13px; border:none; border-radius:12px; color:white; font-weight:700; font-size:14px; cursor:pointer; }
+.btn-blue { background:#5a7d3c; }
+.btn-orange { background:#e67e22; }
+.info-box { background:#eef3e6; padding:11px; border-radius:10px; font-size:13px; margin-top:12px; display:flex; gap:8px; }
+.table-container { margin-top:18px; }
+.table-container h4 { margin-bottom:10px; }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+th, td { padding:10px 6px; border-bottom:1px solid #eee; text-align:left; }
+th { background:#f8f8f8; }
+.text-center { text-align:center; } .text-right { text-align:right; }
+.table-empty { text-align:center; color:#999; padding:20px; }
+.app-footer { text-align:center; padding:20px; font-size:12px; color:#888; }
+.footer-highlight { color:#5a7d3c; font-weight:700; margin-top:4px; }
+</style>
+</head>
+<body>
+<div class="app-container">
+<header class="main-header">
+  <div class="logo-box">
+    <img src="assets/images/logo-sekolah.png" alt="Logo SMK Prama Artha" onerror="this.style.display='none'; document.getElementById('iconFallback').style.display='block';">
+    <i id="iconFallback" class="fa-solid fa-graduation-cap" style="display:none;"></i>
+  </div>
+  <h2 class="sub-title">SMK SWASTA PRAMA ARTHA</h2>
+  <h1 class="main-title">TABUNGAN SISWA</h1>
+  <p class="badge-title">Sistem Informasi Tabungan & Investasi Kelas</p>
+</header>
+
+<nav class="nav-menu">
+  <a href="#dashboard" class="nav-item active">Beranda</a>
+  <a href="#data-siswa" class="nav-item">Data Siswa</a>
+  <a href="#penarikan" class="nav-item">Penarikan</a>
+</nav>
+
+<main class="main-content">
+<section id="dashboard">
+  <div class="section-header"><div><h3>Dashboard</h3><p class="sub-text">Ringkasan keuangan tabungan siswa</p></div></div>
+  <div class="card-grid">
+    <div class="card card-blue"><i class="fa-solid fa-money-bill-trend-up card-icon"></i><p class="card-label">Total Setoran</p><p id="totalSetoran" class="card-value">Rp 0</p></div>
+    <div class="card card-orange"><i class="fa-solid fa-wallet card-icon"></i><p class="card-label">Total Penarikan</p><p id="totalPenarikan" class="card-value">Rp 0</p></div>
+    <div class="card card-green"><i class="fa-solid fa-vault card-icon"></i><p class="card-label">Saldo Tabungan</p><p id="saldoTabungan" class="card-value">Rp 0</p></div>
+    <div class="card card-purple"><i class="fa-solid fa-users card-icon"></i><p class="card-label">Jumlah Siswa</p><p id="jumlahSiswa" class="card-value">0</p></div>
+  </div>
+</section>
+
+<section id="data-siswa" class="section-block bg-white">
+  <div class="form-header"><i class="fa-solid fa-user-plus"></i><h3>Pendaftaran Siswa Baru</h3></div>
+  <div class="input-box"><label>Nama Siswa</label><input id="namaSiswa" type="text" placeholder="Masukkan nama lengkap siswa"></div>
+  <div class="input-box"><label>Pilih Jurusan dan Kelas</label>
+    <select id="kelasSiswa">
+      <option value="">-- Pilih Kelas --</option>
+      <option>X RPL 1</option><option>X RPL 2</option><option>X RPL 3</option>
+      <option>XI RPL 1</option><option>XI RPL 2</option>
+      <option>X AKL</option><option>XI AKL</option>
+      <option>X TSM 1</option><option>X TSM 2</option><option>XI TSM 1</option><option>XI TSM 2</option>
+      <option>X MPLB</option><option>XI MPLB</option>
+    </select></div>
+  <div class="input-box"><label>Setoran Awal (Rp)</label><input id="setoranAwal" type="number" placeholder="Contoh: 10000"></div>
+  <button id="btnTambah" class="btn btn-blue">Tambah & Setor Tabungan</button>
+  <div class="info-box"><span>💡</span><p>Saran setoran rutin minggu minimum: <b>Rp5.000</b></p></div>
+  <div class="table-container"><h4>Daftar Tabungan Siswa</h4>
+    <table><thead><tr><th class="text-center">No</th><th>Nama</th><th>Kelas</th><th class="text-right">Saldo</th></tr></thead>
+    <tbody id="tabelSiswa"><tr id="emptyRow"><td colspan="4" class="table-empty">Belum ada data siswa.</td></tr></tbody></table>
+  </div>
+</section>
+
+<section id="penarikan" class="section-block bg-white">
+  <div class="form-header"><h3>Pencatatan Penarikan Tabungan</h3></div>
+  <div class="input-box"><label>Keterangan / Keperluan Keluar</label><input id="tarikKeterangan" type="text" placeholder="Contoh: Penarikan perlengkapan praktek"></div>
+  <div class="input-box"><label>Nominal Penarikan (Rp)</label><input id="tarikNominal" type="number" placeholder="Masukkan nominal uang keluar"></div>
+  <button id="btnTarik" class="btn btn-orange">Simpan & Ambil Uang</button>
+</section>
+</main>
+
+<footer class="app-footer"><p>© 2026 Tabungan Siswa Mobile. All Rights Reserved.</p><p class="footer-highlight">SMK Swasta Prama Artha - Project Kelompok 5</p></footer>
+</div>
+
+<script>
+let siswa = [];
+let totalSetoran = 0;
+let totalPenarikan = 0;
+function formatRupiah(n){ return "Rp " + n.toLocaleString('id-ID'); }
+function updateUI(){
+  document.getElementById('totalSetoran').textContent = formatRupiah(totalSetoran);
+  document.getElementById('totalPenarikan').textContent = formatRupiah(totalPenarikan);
+  document.getElementById('saldoTabungan').textContent = formatRupiah(totalSetoran - totalPenarikan);
+  document.getElementById('jumlahSiswa').textContent = siswa.length;
+  let tbody = document.getElementById('tabelSiswa');
+  if(siswa.length===0){ tbody.innerHTML = '<tr><td colspan="4" class="table-empty">Belum ada data siswa.</td></tr>'; return; }
+  tbody.innerHTML = siswa.map((s,i)=>`<tr><td class="text-center">${i+1}</td><td>${s.nama}</td><td>${s.kelas}</td><td class="text-right">${formatRupiah(s.saldo)}</td></tr>`).join('');
+}
+document.getElementById('btnTambah').onclick = function(){
+  let nama = document.getElementById('namaSiswa').value.trim();
+  let kelas = document.getElementById('kelasSiswa').value;
+  let setoran = parseInt(document.getElementById('setoranAwal').value) || 0;
+  if(!nama || !kelas){ alert('Isi nama dan kelas dulu ya!'); return; }
+  siswa.push({nama, kelas, saldo:setoran});
+  totalSetoran += setoran;
+  document.getElementById('namaSiswa').value=''; document.getElementById('setoranAwal').value='';
+  updateUI(); alert('Berhasil ditambah!');
+};
+document.getElementById('btnTarik').onclick = function(){
+  let nominal = parseInt(document.getElementById('tarikNominal').value) || 0;
+  if(nominal<=0){ alert('Masukkan nominal penarikan!'); return; }
+  if(nominal > (totalSetoran-totalPenarikan)){ alert('Saldo tidak cukup!'); return; }
+  totalPenarikan += nominal;
+  document.getElementById('tarikNominal').value=''; document.getElementById('tarikKeterangan').value='';
+  updateUI(); alert('Penarikan berhasil!');
+};
+// Navigasi tab
+document.querySelectorAll('.nav-item').forEach(el=>{
+  el.onclick = function(e){
+    document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+    this.classList.add('active');
+  }
+});
+</script>
+</body>
+</html>
